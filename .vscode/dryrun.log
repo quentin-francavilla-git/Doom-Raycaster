@@ -1,0 +1,12 @@
+make.exe --dry-run --keep-going --print-directory
+make: Entering directory 'd:/Users/quent/Documents/Projets/Doom'
+g++ -g -w -c src/main.cpp -o src/main.o
+ 
+g++ -g -w -c src/Classes/Character.cpp -o src/Classes/Character.o
+ 
+g++ -g -w -c src/Classes/Game.cpp -o src/Classes/Game.o
+g++ -g -w -c src/Classes/Player.cpp -o src/Classes/Player.o
+ 
+g++ -g -w src/main.o src/Classes/Character.o src/Classes/Game.o src/Classes/Player.o -lsfml-graphics -lsfml-window -lsfml-system -o doom.exe 
+make: Leaving directory 'd:/Users/quent/Documents/Projets/Doom'
+ 

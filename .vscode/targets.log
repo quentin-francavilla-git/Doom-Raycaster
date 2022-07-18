@@ -1,0 +1,367 @@
+make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 4.3
+# Built for Windows32
+# Copyright (C) 1988-2020 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+
+# Make data base, printed on Sun Jul 17 21:23:52 2022
+
+# Variables
+
+# environment
+SYSTEMDRIVE = C:
+# environment
+LC_ALL = C
+# makefile (from 'Makefile', line 8)
+SRC = $(wildcard ./src/*.cpp ./src/Classes/*.cpp)
+# environment
+USERPROFILE = C:\Users\quent
+# environment
+LOCALAPPDATA = C:\Users\quent\AppData\Local
+# environment
+VSCODE_CWD = D:\Users\quent\AppData\Local\Programs\Microsoft VS Code
+# environment
+CHOCOLATEYINSTALL = C:\ProgramData\chocolatey
+# environment
+SYSTEMROOT = C:\Windows
+# environment
+PROCESSOR_LEVEL = 6
+# environment
+PSMODULEPATH = C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules
+# default
+MAKE_COMMAND := make.exe
+# automatic
+@D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
+# environment
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_14664_DRIANANIFNETHVZT
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# default
+.VARIABLES := 
+# automatic
+%D = $(patsubst %/,%,$(patsubst %\,%,$(dir $%)))
+# automatic
+^D = $(patsubst %/,%,$(patsubst %\,%,$(dir $^)))
+# automatic
+%F = $(notdir $%)
+# environment
+VSCODE_CODE_CACHE_PATH = C:\Users\quent\AppData\Roaming\Code\CachedData\b06ae3b2d2dbfe28bca3134cc6be65935cdfea6a
+# environment
+LANG = C
+# default
+.LOADED := 
+# environment
+TMP = C:\Users\quent\AppData\Local\Temp
+# default
+.INCLUDE_DIRS = .
+# environment
+PROCESSOR_ARCHITEW6432 = AMD64
+# makefile
+MAKEFLAGS = pqrR
+# environment
+ONEDRIVE = C:\Users\quent\OneDrive
+# makefile
+CURDIR := d:/Users/quent/Documents/Projets/Doom
+# environment
+APPLICATION_INSIGHTS_NO_DIAG 
+NOSTIC_CHANNEL = 1
+# automatic
+*D = $(patsubst %/,%,$(patsubst %\,%,$(dir $*)))
+# environment
+PROGRAMFILES = C:\Program Files (x86)
+# environment
+MFLAGS = -pqrR
+# default
+.SHELLFLAGS := -c
+# environment
+COMMONPROGRAMW6432 = C:\Program Files\Common Files
+# automatic
++D = $(patsubst %/,%,$(patsubst %\,%,$(dir $+)))
+# makefile (from 'Makefile', line 1)
+MAKEFILE_LIST := Makefile
+# automatic
+@F = $(notdir $@)
+# environment
+VSCODE_PID = 14664
+# automatic
+?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
+# automatic
+*F = $(notdir $*)
+# environment
+RG_GPU_FRAMEWORK_ENGINE_RESOURCEDIR = C:\Program Files\Red Giant\RGFX
+# automatic
+<D = $(patsubst %/,%,$(patsubst %\,%,$(dir $<)))
+# environment
+VSCODE_NLS_CONFIG = {"locale":"fr","availableLanguages":{"*":"fr"},"_languagePackId":"8e1a08857df44efaeace20a1f4372f40.fr","_translationsConfigFile":"C:\\Users\\quent\\AppData\\Roaming\\Code\\clp\\8e1a08857df44efaeace20a1f4372f40.fr\\tcf.json","_cacheRoot":"C:\\Users\\quent\\AppData\\Roaming\\Code\\clp\\8e1a08857df44efaeace20a1f4372f40.fr","_resolvedLanguagePackCoreLocation":"C:\\Users\\quent\\AppData\\Roaming\\Code\\clp\\8e1a08857df44efaeace20a1f4372f40.fr\\b06ae3b2d2dbfe28bca3134cc6be65935cdfea6a","_corruptedFile":"C:\\Users\\quent\\AppData\\Roaming\\Code\\clp\\8e1a08857df44efaeace20a1f4372f40.fr\\corrupted.info","_languagePackSupport":true}
+# default
+MAKE_HOST := Windows32
+# environment
+PROGRAMDATA = C:\ProgramData
+# default
+SHELL := sh.exe
+# environment
+HOMEPATH = \Users\quent
+# default
+MAKECMDGOALS := all
+# environment
+DRIVERDATA = C:\Windows\System32\Drivers\DriverData
+# environment
+COMSPEC = C:\Windows\system32\cmd.exe
+# environment
+WINDIR = C:\Windows
+# environment
+MAKELEVEL := 0
+# default
+MAKE = $(MAKE_COMMAND)
+# environment
+PATH = C:\Python39\Scripts\;C:\Python39\;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\MinGW\bin;C:\Program Files (x86)\Windows Live\Shared;C:\Program Files\dotnet\;D:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\msys64\bin;C:\Program Files\Git\cmd;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Users\quent\AppData\Local\Microsoft\WindowsApps;D:\Users\quent\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\quent\AppData\Local\GitHubDesktop\bin;C:\Users\quent\.dotnet\tools;C:\Users\quent\AppData\Roaming\npm;D:\Program Files (x86)\Atmel\Flip 3.4.7\bin
+# environment
+ZES_ENABLE_SYSMAN = 1
+# environment
+COMPUTERNAME = DESKTOP-ER6B0QB
+# default
+MAKEFILES := 
+# automatic
+^F = $(notdir $^)
+# environment
+PROMPT = $P$G
+# environment
+CHOCOLATEYLASTPATHUPDATE = 132776072608447015
+# environment
+LOGONSERVER = \\DESKTOP-ER6B0QB
+# environment
+USERNAME = quent
+# environment
+COMMONPROGRAMFILES = C:\Program Files (x86)\Common Files
+# automatic
+?F = $(notdir $?)
+# environment
+PROGRAMW6432 = C:\Program Files
+# makefile (from 'Makefile', line 15)
+NAME = doom.exe
+# environment
+PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY;.PYW
+# automatic
++F = $(notdir $+)
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# makefile (from 'Makefile', line 11)
+OBJECTS := ./src/main.o ./src/Classes/Character.o ./src/Classes/Game.o ./src/Classes/Player.o
+# environment
+USERDOMAIN = DESKTOP-ER6B0QB
+# 'override' directive
+GNUMAKEFLAGS := 
+# environment
+OS = Windows_NT
+# environment
+__COMPAT_LAYER = DetectorsAppHealth
+# makefile
+.DEFAULT_GOAL := all
+# default
+MAKE_VERSION := 4.3
+# environment
+PROGRAMFILES(X86) = C:\Program Files (x86)
+# environment
+USERDOMAIN_ROAMINGPROFILE = DESKTOP-ER6B0QB
+# environment
+NUMBER_OF_PROCESSORS = 12
+# environment
+PUBLIC = C:\Users\Public
+# environment
+APPDATA = C:\Users\quent\AppData\Roaming
+# makefile (from 'Makefile', line 13)
+CFLAGS = -w
+# environment
+HOMEDRIVE = C:
+# environment
+PROCESSOR_ARCHITECTURE = x86
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+COMMONPROGRAMFILES(X86) = C:\Program Files (x86)\Common Files
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# environment
+TEMP = C:\Users\quent\AppData\Local\Temp
+# environment
+VSCODE_IPC_HOOK = \\.\pipe\7c95411b2c88302e7847b52f6399c434-1.69.1-main-sock
+# default
+.RECIPEPREFIX := 
+# automatic
+<F = $(notdir $<)
+# default
+SUFFIXES := 
+# environment
+ALLUSERSPROFILE = C:\ProgramData
+# environment
+SESSIONNAME = Console
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync load
+# environment
+PROCESSOR_REVISION = 9e0a
+# environment
+PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 158 Stepping 10, GenuineIntel
+# variable set hash-table stats:
+# Load=96/1024=9%, Rehash=0, Collisions=13/134=10%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# src (key d:/Users/quent/Documents/Projets/Doom/src, mtime 1658060613): 4 files, no impossibilities.
+# . (key d:/Users/quent/Documents/Projets/Doom, mtime 1658060616): 19 files, no impossibilities.
+# ./src/Classes (key d:/Users/quent/Documents/Projets/Doom/src/Classes, mtime 1658060613): 5 files, no impossibilities.
+# ./src (key d:/Users/quent/Documents/Projets/Doom/src, mtime 1658060613): 4 files, no impossibilities.
+
+# 32 files, no impossibilities in 4 directories.
+
+# Implicit Rules
+
+%.o: %.c
+#  recipe to execute (from 'Makefile', line 20):
+	g++ -g $(CFLAGS) -c $< -o $@
+
+%.o: %.cpp
+#  recipe to execute (from 'Makefile', line  
+23):
+	g++ -g $(CFLAGS) -c $< -o $@
+
+# 2 implicit rules, 0 (0.0%) terminal.
+# Files
+
+# Not a target:
+src/Classes/Player.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/Classes/Game.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-17 21:23:48
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/Classes/Character.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/main.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-06 14:03:18
+#  File has been updated.
+#  Successfully updated.
+
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 29):
+	rm -f $(OBJECTS)
+
+re: all
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 35):
+	rm -f $(OBJECTS) 
+
+src/main.o: src/main.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'src/main'
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := src/main.o
+# automatic
+# * := src/main
+# automatic
+# < := src/main.cpp
+# automatic
+# + := src/main.cpp
+# automatic
+# % := 
+# automatic
+# ^ := src/main.cpp
+# automatic
+# ? := src/main.cpp
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/14=7%
+#  recipe to execute (from 'Makefile', line 23):
+	g++ -g $(CFLAGS) -c $< -o $@
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+all: doom.exe
+#  Phony target (prerequisite of .PHONY).
+#  Command line target.
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/4=0%
+
+fclean: clean
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 32):
+	rm -f $(NAME)
+
+doom.exe: src/main.o src/Classes/Character.o src/Classes/Game.o src/Classes/Player.o
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/4=0%
+#  recipe to execute (from 'Makefile', line 26):
+	g++ -g $(CFLAGS) $^ -lsfml-graphics -lsfml-window -lsfml-system -o $@ 
+
+.PHONY: all clean fclean re
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# files hash-table stats:
+# Lo 
+ad=14/1024=1%, Rehash=0, Collisions=0/41=0%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 44 / storage = 511 B / avg = 11 B
+# current buf: size = 8174 B / used = 511 B / count = 44 / avg = 11 B
+
+# strcache performance: lookups = 69 / hit rate = 36%
+# hash-table stats:
+# Load=44/8192=1%, Rehash=0, Collisions=0/69=0%
+# Finished Make data base on Sun Jul 17 21:23:52 2022
+
+ 
