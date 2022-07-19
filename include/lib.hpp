@@ -12,7 +12,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <math.h>
 
 using namespace std;
+#define PI 3.14159265359
 
 #endif // LIB_HPP_

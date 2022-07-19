@@ -3,18 +3,17 @@
 
 int main()
 {
-    Game game;
+  Game game;
 
+  cout << game.getPlayer(0).getName() << endl;
 
-    cout << game.getPlayer(0).getName() << endl;
+  while (game.running())
+  {
+    // Update
+    game.update();
+    // Render
+    game.render();
+  }
 
-    while (game.running())
-    {
-        // Update
-        game.update();
-        // Render
-        game.render();
-    }
-
-    return 0;
+  return 0;
 }

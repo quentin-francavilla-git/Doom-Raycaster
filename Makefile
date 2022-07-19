@@ -12,6 +12,8 @@ OBJECTS += $(filter %.o,$(SRC:.cpp=.o))
 
 CFLAGS  = -w
 
+LIBPATH = C:\Users\Quentin\Documents\Projets\Libs\SFML-2.5.1\lib
+
 NAME	=	doom.exe
 
 all:	$(NAME)
@@ -23,7 +25,7 @@ all:	$(NAME)
 	g++ -g $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJECTS)
-	g++ -g $(CFLAGS) $^ -lsfml-graphics -lsfml-window -lsfml-system -o $@ 
+	g++ -g $(CFLAGS) $^ -L/$(LIBPATH) -o $@ -lsfml-graphics -lsfml-window -lsfml-system
 
 clean:
 	rm -f $(OBJECTS)

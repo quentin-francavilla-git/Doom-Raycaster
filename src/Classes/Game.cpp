@@ -29,16 +29,16 @@ void Game::initMap()
     mapY = 8;
     mapS = 64;
 
-    map = {
-        1,1,1,1,1,1,1,1,
-        1,0,1,0,0,0,0,1,
-        1,0,1,0,0,0,0,1,
-        1,0,1,0,0,0,0,1,
-        1,0,0,0,0,0,0,1,
-        1,0,0,1,0,0,0,1,
-        1,0,0,0,0,0,0,1,
-        1,1,1,1,1,1,1,1,
-    };
+      map = {
+          1,1,1,1,1,1,1,1,
+          1,0,1,0,0,0,0,1,
+          1,0,1,0,0,0,0,1,
+          1,0,1,0,0,0,0,1,
+          1,0,0,0,0,0,0,1,
+          1,0,0,1,0,0,0,1,
+          1,0,0,0,0,0,0,1,
+          1,1,1,1,1,1,1,1,
+      };
 }
 
 void Game::initWindow()
@@ -52,7 +52,7 @@ void Game::initWindow()
 
 void Game::initPlayer()
 {
-    player = (Player **) malloc(MAX_PLAYERS * sizeof(Player));
+    player = (Player **)malloc(MAX_PLAYERS * sizeof(Player));
     player[0] = new Player("Pablo", "Jotaro");
 }
 
@@ -61,10 +61,12 @@ void Game::renderMap2D()
 {
     int x, y, xo, yo = 0;
     sf::Color mapColor = sf::Color::White;
-    sf::Vertex vertices[4];
+    sf::Vertex vertices[3];
 
-    for (y = 0; y < mapY; y++) {
-        for (x = 0; x < mapX; x++) {
+    for (y = 0; y < mapY; y++)
+    {
+        for (x = 0; x < mapX; x++)
+        {
             if (map[y * mapX + x] == 1)
                 mapColor = sf::Color::White;
             else
@@ -72,17 +74,16 @@ void Game::renderMap2D()
 
             xo = x * mapS;
             yo = y * mapS;
-            
-            vertices[0] = sf::Vertex(sf::Vector2f(xo + 1, yo + 1), mapColor, sf::Vector2f(0,  0));
-            vertices[1] = sf::Vertex(sf::Vector2f(xo + 1, yo + mapS - 1), mapColor, sf::Vector2f(0,  10));
-            vertices[2] = sf::Vertex(sf::Vector2f(xo + mapS - 1, yo + mapS - 1), mapColor, sf::Vector2f(10,  10));
-            vertices[3] = sf::Vertex(sf::Vector2f(xo + mapS - 1, yo + 1), mapColor, sf::Vector2f(10,  0));
+
+            vertices[0] = sf::Vertex(sf::Vector2f(xo + 1, yo + 1), mapColor, sf::Vector2f(0, 0));
+            vertices[1] = sf::Vertex(sf::Vector2f(xo + 1, yo + mapS - 1), mapColor, sf::Vector2f(0, 10));
+            vertices[2] = sf::Vertex(sf::Vector2f(xo + mapS - 1, yo + mapS - 1), mapColor, sf::Vector2f(10, 10));
+            vertices[3] = sf::Vertex(sf::Vector2f(xo + mapS - 1, yo + 1), mapColor, sf::Vector2f(10, 0));
 
             window->draw(vertices, 4, sf::Quads);
         }
     }
 }
-
 
 const bool Game::running() const
 {
@@ -140,8 +141,7 @@ void Game::updateMousePositions()
     mousePosWindows = sf::Mouse::getPosition(*window);
 }
 
-
-//Player Functions
+// Player Functions
 void Game::updatePlayer()
 {
     player[0]->update(dt);

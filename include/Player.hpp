@@ -23,9 +23,11 @@ private:
     sf::Clock animationTimer;
     sf::Texture texture;
     sf::RectangleShape playerRectangle;
-    float px;
-    float py;
+
+    //Position
+    sf::Vector2f playerDelta;
     sf::Vector2f playerPos;
+    float playerAngle;
 
     // Animation
     short animState;

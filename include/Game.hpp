@@ -59,7 +59,7 @@ public:
     void renderPlayer();
     Player getPlayer(int indexPlayer);
 
-    //Map
+    // Map
     void renderMap2D();
 };
 
