@@ -61,7 +61,7 @@ void Player::updateMovement(float dt)
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q)) // Left
     {
-        playerAngle -= 0.1;
+        playerAngle -= 6 * dt;
 
         if (playerAngle < 0)
             playerAngle += 2 * PI;
@@ -71,17 +71,17 @@ void Player::updateMovement(float dt)
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) // Right
     {
-        playerAngle += 0.1;
+        playerAngle += 6 * dt;
 
         if (playerAngle > 2 * PI)
-            playerAngle += 0;
+            playerAngle += 2 * PI;
         
         playerDelta.x = cos(playerAngle) * 5;
         playerDelta.y = sin(playerAngle) * 5;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Z)) // UP
     {
-        playerRectangle.move(playerDelta.x, playerDelta.y);
+        playerRectangle.move(playerDelta.x * speed * dt, playerDelta.y * speed * dt);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) // Down
     {
@@ -90,7 +90,6 @@ void Player::updateMovement(float dt)
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) // Up
     {
     }
-
     playerPos = playerRectangle.getPosition();
 }
 
@@ -108,7 +107,8 @@ void Player::render(sf::RenderTarget &target)
     sf::Vertex lineVertices[1];
 
     lineVertices[0] = sf::Vertex(sf::Vector2f(playerPos.x + 4, playerPos.y + 4), sf::Color::Red, sf::Vector2f(0, 0));
-    lineVertices[1] = sf::Vertex(sf::Vector2f(playerPos.x + playerDelta.x * 5, playerPos.y + playerDelta.y * 5), sf::Color::Red, sf::Vector2f(0, 10));
+    lineVertices[1] = sf::Vertex(sf::Vector2f(playerPos.x + 4 + playerDelta.x * 5, playerPos.y + 4 + playerDelta.y * 5),
+    sf::Color::Red, sf::Vector2f(0, 10));
 
     target.draw(lineVertices, 2, sf::Lines);
 }
