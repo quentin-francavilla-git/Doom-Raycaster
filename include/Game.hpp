@@ -3,6 +3,7 @@
 
 #include "lib.hpp"
 #include "Player.hpp"
+#include "Map.hpp"
 
 #define WINDOW_WIDTH 1980
 #define WINDOW_HEIGHT 1080
@@ -26,12 +27,7 @@ private:
 
     // Objects
     Player **player;
-
-    // Map
-    int mapX;
-    int mapY;
-    int mapS;
-    std::vector<int> map;
+    Map *map;
 
     // Private Functions
     void initVariables();
@@ -53,6 +49,7 @@ public:
     float getTime();
     void render();
     void updateMousePositions();
+    void renderRays();
 
     // Player
     void updatePlayer();

@@ -16,5 +16,7 @@
 
 using namespace std;
 #define PI 3.14159265359
+#define P2 PI / 2
+#define P3 ((3 * PI) / 2)
 
 #endif // LIB_HPP_

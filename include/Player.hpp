@@ -56,6 +56,8 @@ public:
     void update(float dt);
     void render(sf::RenderTarget &target);
 
+    const float &getPlayerAngle() const;
+    const sf::Vector2f &getPlayerPosition() const;
     const string &getName() const;
     void setName(string newName);
 };

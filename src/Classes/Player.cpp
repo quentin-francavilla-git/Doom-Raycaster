@@ -57,8 +57,6 @@ void Player::updatePhysics()
 
 void Player::updateMovement(float dt)
 {
-    animState = IDLE;
-
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q)) // Left
     {
         playerAngle -= 6 * dt;
@@ -74,7 +72,7 @@ void Player::updateMovement(float dt)
         playerAngle += 6 * dt;
 
         if (playerAngle > 2 * PI)
-            playerAngle += 2 * PI;
+            playerAngle -= 2 * PI;
         
         playerDelta.x = cos(playerAngle) * 5;
         playerDelta.y = sin(playerAngle) * 5;
@@ -116,6 +114,15 @@ void Player::render(sf::RenderTarget &target)
 const string &Player::getName() const
 {
     return name;
+}
+
+const float &Player::getPlayerAngle() const
+{
+    return playerAngle;
+}
+const sf::Vector2f &Player::getPlayerPosition() const
+{
+    return playerPos;
 }
 
 void Player::setName(string newName)
