@@ -44,6 +44,11 @@ void Game::initPlayer()
 }
 
 // Public Functions
+float Game::calcDistance(float ax, float ay, float bx, float by, float angle)
+{
+    return (sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay)));
+}
+
 void Game::renderRays()
 {
     // Map
@@ -51,22 +56,34 @@ void Game::renderRays()
     int mapX, mapY, mapPosition, dof = 0;
     int tileSize = map->getTileSizeMap();
     std::vector<int> mapArray = map->getMapArray();
+    sf::Color wallColor(255, 0, 0, 255);
 
     // Rays
     int ray = 0;
     float rayX, rayY, rayAngle = 0;
     float xOffset, yOffset = 0;
+    float distFinal = 0;
+    sf::Color rayColor = sf::Color::Green;
 
     // Player
     float playerAngle = player[0]->getPlayerAngle();
     sf::Vector2f playerPos = player[0]->getPlayerPosition();
 
-    rayAngle = playerAngle;
+    // Init first ray
+    rayAngle = playerAngle - DR * 30;
+    if (rayAngle < 0)
+        rayAngle += 2 * PI;
+    if (rayAngle > 2 * PI)
+        rayAngle -= 2 * PI;
 
-    for (ray = 0; ray < 1; ray++)
+    // One loop = 1 ray casting
+    for (ray = 0; ray < 60; ray++)
     {
-        //Checking Horizontal Lines
+        // Checking Horizontal Lines
         dof = 0;
+        float distHorizontal = 100000;
+        float tmpHorizontalRayX = playerPos.x;
+        float tmpHorizontalRayY = playerPos.y;
 
         float aTan = -1 / tan(rayAngle);
 
@@ -107,6 +124,10 @@ void Game::renderRays()
 
             if (mapPosition > 0 && mapPosition < mapMaxSize.x * mapMaxSize.y && mapArray[mapPosition] == 1) // Hit wall
             {
+                // Stocking in tmp to calculate shortest ray between H and V
+                tmpHorizontalRayX = rayX;
+                tmpHorizontalRayY = rayY;
+                distHorizontal = calcDistance(playerPos.x, playerPos.y, tmpHorizontalRayX, tmpHorizontalRayY, playerAngle);
                 dof = 8;
             }
             else // Next line
@@ -116,14 +137,12 @@ void Game::renderRays()
                 dof += 1;
             }
         }
-        sf::Vertex ray[2];
 
-        ray[0] = sf::Vertex(sf::Vector2f(playerPos.x + 4, playerPos.y + 4), sf::Color::Red, sf::Vector2f(0, 0));
-        ray[1] = sf::Vertex(sf::Vector2f(rayX + 4, rayY + 4), sf::Color::Red, sf::Vector2f(0, 10));
-        window->draw(ray, 2, sf::Lines);
-
-        // Checking Vertical Lines
+        // -------- Checking Vertical Lines
         dof = 0;
+        float distVertical = 100000;
+        float tmpVerticalRayX = playerPos.x;
+        float tmpVerticalRayY = playerPos.y;
 
         float nTan = -tan(rayAngle);
 
@@ -164,6 +183,10 @@ void Game::renderRays()
 
             if (mapPosition > 0 && mapPosition < mapMaxSize.x * mapMaxSize.y && mapArray[mapPosition] == 1) // Hit wall
             {
+                // Stocking in tmp to calculate shortest ray between H and V
+                tmpVerticalRayX = rayX;
+                tmpVerticalRayY = rayY;
+                distVertical = calcDistance(playerPos.x, playerPos.y, tmpVerticalRayX, tmpVerticalRayY, playerAngle);
                 dof = 8;
             }
             else // Next line
@@ -173,13 +196,59 @@ void Game::renderRays()
                 dof += 1;
             }
         }
-        sf::Vertex ray2[4];
 
-        ray2[0] = sf::Vertex(sf::Vector2f(playerPos.x, playerPos.y), sf::Color::Green, sf::Vector2f(0, 0));
-        ray2[1] = sf::Vertex(sf::Vector2f(playerPos.x + 8, playerPos.y + 8), sf::Color::Green, sf::Vector2f(0, 0));
-        ray2[2] = sf::Vertex(sf::Vector2f(rayX + 8, rayY + 8), sf::Color::Green, sf::Vector2f(0, 0));
-        ray2[3] = sf::Vertex(sf::Vector2f(rayX, rayY), sf::Color::Green, sf::Vector2f(0, 10));
-        window->draw(ray2, 4, sf::Quads);
+        // Checking shortest ray beetween Horizontal and Vertical
+        if (distVertical < distHorizontal) //Hiting Vertical Wall
+        {
+            rayX = tmpVerticalRayX;
+            rayY = tmpVerticalRayY;
+            distFinal = distVertical;
+            wallColor.r = 176;
+        }
+        if (distHorizontal < distVertical) //Hiting Horizontal Wall
+        {
+            rayX = tmpHorizontalRayX;
+            rayY = tmpHorizontalRayY;
+            distFinal = distHorizontal;
+            wallColor.r = 255;
+        }
+
+        // Drawing rays
+        sf::Vertex ray2[2];
+        ray2[0] = sf::Vertex(sf::Vector2f(playerPos.x + 4, playerPos.y + 4), rayColor, sf::Vector2f(0, 0));
+        ray2[1] = sf::Vertex(sf::Vector2f(rayX, rayY), rayColor, sf::Vector2f(0, 0));
+        window->draw(ray2, 2, sf::Lines);
+
+        // Drawing 3D walls
+        // Fix fisheye
+        float cosineAngle = playerAngle - rayAngle;
+        if (cosineAngle < 0)
+            cosineAngle += 2 * PI;
+        if (cosineAngle > 2 * PI)
+            cosineAngle -= 2 * PI;
+        distFinal = distFinal * cos(cosineAngle);
+
+        // Line Height
+        float lineHeight = (tileSize * 320) / distFinal;
+        if (lineHeight > 320)
+            lineHeight = 320;
+
+        // Line Offset
+        float lineOffset = (160 - lineHeight) / 2;
+
+        sf::Vertex walls[4];
+        walls[0] = sf::Vertex(sf::Vector2f(ray * 8 + 530, lineOffset), wallColor, sf::Vector2f(0, 0));
+        walls[1] = sf::Vertex(sf::Vector2f(ray * 8 + 530 + 20, lineOffset), wallColor, sf::Vector2f(0, 0));
+        walls[2] = sf::Vertex(sf::Vector2f(ray * 8 + 530 + 20, lineHeight + lineOffset), wallColor, sf::Vector2f(0, 0));
+        walls[3] = sf::Vertex(sf::Vector2f(ray * 8 + 530, lineHeight + lineOffset), wallColor, sf::Vector2f(0, 0));
+        window->draw(walls, 4, sf::Quads);
+
+        // Increasing angle for next ray
+        rayAngle += DR;
+        if (rayAngle < 0)
+            rayAngle += 2 * PI;
+        if (rayAngle > 2 * PI)
+            rayAngle -= 2 * PI;
     }
 }
 

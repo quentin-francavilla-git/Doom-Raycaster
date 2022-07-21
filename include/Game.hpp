@@ -49,7 +49,10 @@ public:
     float getTime();
     void render();
     void updateMousePositions();
+
+    //rays
     void renderRays();
+    float calcDistance(float ax, float ay, float bx, float by, float angle);
 
     // Player
     void updatePlayer();

@@ -101,14 +101,14 @@ void Player::render(sf::RenderTarget &target)
     target.draw(sprite);
 
 
-    //draw direction line
-    sf::Vertex lineVertices[1];
+    // //draw direction line
+    // sf::Vertex lineVertices[1];
 
-    lineVertices[0] = sf::Vertex(sf::Vector2f(playerPos.x + 4, playerPos.y + 4), sf::Color::Red, sf::Vector2f(0, 0));
-    lineVertices[1] = sf::Vertex(sf::Vector2f(playerPos.x + 4 + playerDelta.x * 5, playerPos.y + 4 + playerDelta.y * 5),
-    sf::Color::Red, sf::Vector2f(0, 10));
+    // lineVertices[0] = sf::Vertex(sf::Vector2f(playerPos.x + 4, playerPos.y + 4), sf::Color::Red, sf::Vector2f(0, 0));
+    // lineVertices[1] = sf::Vertex(sf::Vector2f(playerPos.x + 4 + playerDelta.x * 5, playerPos.y + 4 + playerDelta.y * 5),
+    // sf::Color::Red, sf::Vector2f(0, 10));
 
-    target.draw(lineVertices, 2, sf::Lines);
+    // target.draw(lineVertices, 2, sf::Lines);
 }
 
 const string &Player::getName() const
