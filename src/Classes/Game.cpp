@@ -229,18 +229,21 @@ void Game::renderRays()
         distFinal = distFinal * cos(cosineAngle);
 
         // Line Height
-        float lineHeight = (tileSize * 320) / distFinal;
-        if (lineHeight > 320)
-            lineHeight = 320;
+        int screenHeight = 800;
+        float lineHeight = (tileSize * screenHeight) / distFinal;
+        if (lineHeight > screenHeight)
+            lineHeight = screenHeight;
 
-        // Line Offset
-        float lineOffset = (160 - lineHeight) / 2;
+        // Line Offset Up
+        float lineOffset = ((screenHeight / 2) - lineHeight) / 2;
 
+
+        int screenWidth = 15;
         sf::Vertex walls[4];
-        walls[0] = sf::Vertex(sf::Vector2f(ray * 8 + 530, lineOffset), wallColor, sf::Vector2f(0, 0));
-        walls[1] = sf::Vertex(sf::Vector2f(ray * 8 + 530 + 20, lineOffset), wallColor, sf::Vector2f(0, 0));
-        walls[2] = sf::Vertex(sf::Vector2f(ray * 8 + 530 + 20, lineHeight + lineOffset), wallColor, sf::Vector2f(0, 0));
-        walls[3] = sf::Vertex(sf::Vector2f(ray * 8 + 530, lineHeight + lineOffset), wallColor, sf::Vector2f(0, 0));
+        walls[0] = sf::Vertex(sf::Vector2f(ray * screenWidth + 530, lineOffset), wallColor, sf::Vector2f(0, 0));
+        walls[1] = sf::Vertex(sf::Vector2f(ray * screenWidth + 530 + screenWidth, lineOffset), wallColor, sf::Vector2f(0, 0));
+        walls[2] = sf::Vertex(sf::Vector2f(ray * screenWidth + 530 + screenWidth, lineHeight + lineOffset), wallColor, sf::Vector2f(0, 0));
+        walls[3] = sf::Vertex(sf::Vector2f(ray * screenWidth + 530, lineHeight + lineOffset), wallColor, sf::Vector2f(0, 0));
         window->draw(walls, 4, sf::Quads);
 
         // Increasing angle for next ray
