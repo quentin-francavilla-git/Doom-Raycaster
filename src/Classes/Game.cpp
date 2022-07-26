@@ -7,6 +7,7 @@ Game::Game()
     initWindow();
     initPlayer();
     initMap();
+    initRays();
 }
 
 Game::~Game()
@@ -25,7 +26,7 @@ void Game::initVariables()
 
 void Game::initMap()
 {
-    map = new Map(64);
+    map = new Map(40);
 }
 
 void Game::initWindow()
@@ -43,221 +44,32 @@ void Game::initPlayer()
     player[0] = new Player("Pablo", "Jotaro");
 }
 
-// Public Functions
-float Game::calcDistance(float ax, float ay, float bx, float by, float angle)
+void Game::initRays()
 {
-    return (sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay)));
+    sf::Vector2i mapMaxSize = map->getMapMaxSize();
+    int tileSize = map->getTileSizeMap();
+    std::vector<int> mapArray = map->getMapArray();
+    float playerAngle = player[0]->getPlayerAngle();
+    sf::Vector2f playerPos = player[0]->getPlayerPosition();
+
+    rays = new Rays(mapMaxSize, tileSize, mapArray, playerAngle, playerPos);
+}
+
+// Public Functions
+void Game::renderMap2D()
+{
+    map->render(*window);
 }
 
 void Game::renderRays()
 {
-    // Map
     sf::Vector2i mapMaxSize = map->getMapMaxSize();
-    int mapX, mapY, mapPosition, dof = 0;
     int tileSize = map->getTileSizeMap();
     std::vector<int> mapArray = map->getMapArray();
-    sf::Color wallColor(255, 0, 0, 255);
-
-    // Rays
-    int ray = 0;
-    float rayX, rayY, rayAngle = 0;
-    float xOffset, yOffset = 0;
-    float distFinal = 0;
-    sf::Color rayColor = sf::Color::Green;
-
-    // Player
     float playerAngle = player[0]->getPlayerAngle();
     sf::Vector2f playerPos = player[0]->getPlayerPosition();
 
-    // Init first ray
-    rayAngle = playerAngle - DR * 30;
-    if (rayAngle < 0)
-        rayAngle += 2 * PI;
-    if (rayAngle > 2 * PI)
-        rayAngle -= 2 * PI;
-
-    // One loop = 1 ray casting
-    for (ray = 0; ray < 60; ray++)
-    {
-        // Checking Horizontal Lines
-        dof = 0;
-        float distHorizontal = 100000;
-        float tmpHorizontalRayX = playerPos.x;
-        float tmpHorizontalRayY = playerPos.y;
-
-        float aTan = -1 / tan(rayAngle);
-
-        if (rayAngle > PI) // looking up
-        {
-            // Checking ray first hit position
-            rayY = (((int)playerPos.y / 64) * 64) - 0.0001;
-            rayX = (playerPos.y - rayY) * aTan + playerPos.x;
-
-            // Checking ray next hit position
-            yOffset = -tileSize;
-            xOffset = -yOffset * aTan;
-        }
-
-        if (rayAngle < PI) // looking down
-        {
-            // Checking ray first hit position
-            rayY = (((int)playerPos.y / 64) * 64) + tileSize;
-            rayX = (playerPos.y - rayY) * aTan + playerPos.x;
-
-            // Checking ray next hit position
-            yOffset = tileSize;
-            xOffset = -yOffset * aTan;
-        }
-
-        if (rayAngle == 0 || rayAngle == PI) // looking straight left or right
-        {
-            rayX = playerPos.x;
-            rayY = playerPos.y;
-            dof = 8;
-        }
-
-        while (dof < 8) // Checking where we are in the map array
-        {
-            mapX = (int)rayX / 64;
-            mapY = (int)rayY / 64;
-            mapPosition = mapY * mapMaxSize.x + mapX;
-
-            if (mapPosition > 0 && mapPosition < mapMaxSize.x * mapMaxSize.y && mapArray[mapPosition] == 1) // Hit wall
-            {
-                // Stocking in tmp to calculate shortest ray between H and V
-                tmpHorizontalRayX = rayX;
-                tmpHorizontalRayY = rayY;
-                distHorizontal = calcDistance(playerPos.x, playerPos.y, tmpHorizontalRayX, tmpHorizontalRayY, playerAngle);
-                dof = 8;
-            }
-            else // Next line
-            {
-                rayX += xOffset;
-                rayY += yOffset;
-                dof += 1;
-            }
-        }
-
-        // -------- Checking Vertical Lines
-        dof = 0;
-        float distVertical = 100000;
-        float tmpVerticalRayX = playerPos.x;
-        float tmpVerticalRayY = playerPos.y;
-
-        float nTan = -tan(rayAngle);
-
-        if (rayAngle > P2 && rayAngle < P3) // looking up
-        {
-            // Checking ray first hit position
-            rayX = (((int)playerPos.x / 64) * 64) - 0.0001;
-            rayY = (playerPos.x - rayX) * nTan + playerPos.y;
-
-            // Checking ray next hit position
-            xOffset = -tileSize;
-            yOffset = -xOffset * nTan;
-        }
-
-        if (rayAngle < P2 || rayAngle > P3) // looking down
-        {
-            // Checking ray first hit position
-            rayX = (((int)playerPos.x / 64) * 64) + tileSize;
-            rayY = (playerPos.x - rayX) * nTan + playerPos.y;
-
-            // Checking ray next hit position
-            xOffset = tileSize;
-            yOffset = -xOffset * nTan;
-        }
-
-        if (rayAngle == 0 || rayAngle == PI) // looking straight left or right
-        {
-            rayX = playerPos.x;
-            rayY = playerPos.y;
-            dof = 8;
-        }
-
-        while (dof < 8) // Checking where we are in the map array
-        {
-            mapX = (int)rayX / 64;
-            mapY = (int)rayY / 64;
-            mapPosition = mapY * mapMaxSize.x + mapX;
-
-            if (mapPosition > 0 && mapPosition < mapMaxSize.x * mapMaxSize.y && mapArray[mapPosition] == 1) // Hit wall
-            {
-                // Stocking in tmp to calculate shortest ray between H and V
-                tmpVerticalRayX = rayX;
-                tmpVerticalRayY = rayY;
-                distVertical = calcDistance(playerPos.x, playerPos.y, tmpVerticalRayX, tmpVerticalRayY, playerAngle);
-                dof = 8;
-            }
-            else // Next line
-            {
-                rayX += xOffset;
-                rayY += yOffset;
-                dof += 1;
-            }
-        }
-
-        // Checking shortest ray beetween Horizontal and Vertical
-        if (distVertical < distHorizontal) //Hiting Vertical Wall
-        {
-            rayX = tmpVerticalRayX;
-            rayY = tmpVerticalRayY;
-            distFinal = distVertical;
-            wallColor.r = 176;
-        }
-        if (distHorizontal < distVertical) //Hiting Horizontal Wall
-        {
-            rayX = tmpHorizontalRayX;
-            rayY = tmpHorizontalRayY;
-            distFinal = distHorizontal;
-            wallColor.r = 255;
-        }
-
-        // Drawing rays
-        sf::Vertex ray2[2];
-        ray2[0] = sf::Vertex(sf::Vector2f(playerPos.x + 4, playerPos.y + 4), rayColor, sf::Vector2f(0, 0));
-        ray2[1] = sf::Vertex(sf::Vector2f(rayX, rayY), rayColor, sf::Vector2f(0, 0));
-        window->draw(ray2, 2, sf::Lines);
-
-        // Drawing 3D walls
-        // Fix fisheye
-        float cosineAngle = playerAngle - rayAngle;
-        if (cosineAngle < 0)
-            cosineAngle += 2 * PI;
-        if (cosineAngle > 2 * PI)
-            cosineAngle -= 2 * PI;
-        distFinal = distFinal * cos(cosineAngle);
-
-        // Line Height
-        int screenHeight = 800;
-        float lineHeight = (tileSize * screenHeight) / distFinal;
-        if (lineHeight > screenHeight)
-            lineHeight = screenHeight;
-
-        // Line Offset Up
-        float lineOffset = ((screenHeight / 2) - lineHeight) / 2;
-
-
-        int screenWidth = 15;
-        sf::Vertex walls[4];
-        walls[0] = sf::Vertex(sf::Vector2f(ray * screenWidth + 530, lineOffset), wallColor, sf::Vector2f(0, 0));
-        walls[1] = sf::Vertex(sf::Vector2f(ray * screenWidth + 530 + screenWidth, lineOffset), wallColor, sf::Vector2f(0, 0));
-        walls[2] = sf::Vertex(sf::Vector2f(ray * screenWidth + 530 + screenWidth, lineHeight + lineOffset), wallColor, sf::Vector2f(0, 0));
-        walls[3] = sf::Vertex(sf::Vector2f(ray * screenWidth + 530, lineHeight + lineOffset), wallColor, sf::Vector2f(0, 0));
-        window->draw(walls, 4, sf::Quads);
-
-        // Increasing angle for next ray
-        rayAngle += DR;
-        if (rayAngle < 0)
-            rayAngle += 2 * PI;
-        if (rayAngle > 2 * PI)
-            rayAngle -= 2 * PI;
-    }
-}
-
-void Game::renderMap2D()
-{
-    map->render(*window);
+    rays->render(*window, mapMaxSize, tileSize, mapArray, playerAngle, playerPos);
 }
 
 const bool Game::running() const

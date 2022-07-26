@@ -4,6 +4,7 @@
 #include "lib.hpp"
 #include "Player.hpp"
 #include "Map.hpp"
+#include "Rays.hpp"
 
 #define WINDOW_WIDTH 1980
 #define WINDOW_HEIGHT 1080
@@ -28,12 +29,14 @@ private:
     // Objects
     Player **player;
     Map *map;
+    Rays *rays;
 
     // Private Functions
     void initVariables();
     void initWindow();
     void initPlayer();
     void initMap();
+    void initRays();
 
 public:
     // Constructors / Destructors
@@ -50,10 +53,6 @@ public:
     void render();
     void updateMousePositions();
 
-    //rays
-    void renderRays();
-    float calcDistance(float ax, float ay, float bx, float by, float angle);
-
     // Player
     void updatePlayer();
     void renderPlayer();
@@ -61,6 +60,9 @@ public:
 
     // Map
     void renderMap2D();
+
+    //Rays
+    void renderRays();
 };
 
 #endif // GAME_HPP_

@@ -21,8 +21,8 @@ void Player::initVariables(string _name, string _characterName)
     animState = IDLE;
     characterName = _characterName;
 
-    playerPos.x = 300;
-    playerPos.y = 300;
+    playerPos.x = 130;
+    playerPos.y = 130;
     playerDelta.x = cos(playerAngle) * 5;
     playerDelta.y = sin(playerAngle) * 5;
     playerAngle = 0;
@@ -83,7 +83,7 @@ void Player::updateMovement(float dt)
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) // Down
     {
-        playerRectangle.move(-playerDelta.x, -playerDelta.y);
+        playerRectangle.move(-playerDelta.x * speed * dt, -playerDelta.y * speed * dt);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) // Up
     {

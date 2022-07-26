@@ -16,7 +16,6 @@ public:
 
     void render(sf::RenderTarget &target);
 
-
     //Get/Set Functions
     const int &getTileSizeMap() const;
     const sf::Vector2i &getMapMaxSize() const;
