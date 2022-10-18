@@ -5,8 +5,6 @@ int main()
 {
   Game game;
 
-  cout << game.getPlayer(0).getName() << endl;
-
   while (game.running())
   {
     // Update

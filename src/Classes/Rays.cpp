@@ -1,7 +1,7 @@
 #include  "../../include/Rays.hpp"
 
 // Constructors Destructors
-Rays::Rays(sf::Vector2i mapMaxSize_, int tileSize_, std::vector<int> mapArray_, float playerAngle_, sf::Vector2f playerPos_)
+Rays::Rays(sf::Vector2i mapMaxSize_, int tileSize_, vector<int> mapArray_, float playerAngle_, sf::Vector2f playerPos_)
 {
     //Map
     mapMaxSize = mapMaxSize_;
@@ -12,7 +12,7 @@ Rays::Rays(sf::Vector2i mapMaxSize_, int tileSize_, std::vector<int> mapArray_, 
     playerAngle = playerAngle_;
     playerPos = playerPos_;
 
-    numberOfRays = 60;
+    numberOfRays = 360;
 
     //Colors
     rayColor = sf::Color::Green;
@@ -20,7 +20,7 @@ Rays::Rays(sf::Vector2i mapMaxSize_, int tileSize_, std::vector<int> mapArray_, 
 
     //Screen
     screenHeight = 700;
-    screenWidth = 10;
+    screenWidth = 2;
     screenOffsetX = 800;
     screenOffsetY = 250;
 }
@@ -36,7 +36,7 @@ float Rays::calcDistance(float ax, float ay, float bx, float by, float angle)
 }
 
 //Public functions
-void Rays::render(sf::RenderTarget &target, sf::Vector2i mapMaxSize_, int tileSize_, std::vector<int> mapArray_, float playerAngle_, sf::Vector2f playerPos_)
+void Rays::render(sf::RenderTarget &target, sf::Vector2i mapMaxSize_, int tileSize_, vector<int> mapArray_, float playerAngle_, sf::Vector2f playerPos_)
 {
     // Map
     int mapX, mapY, mapPosition, dof = 0;
@@ -107,7 +107,7 @@ void Rays::render(sf::RenderTarget &target, sf::Vector2i mapMaxSize_, int tileSi
             mapY = (int)rayY / tileSize;
             mapPosition = mapY * mapMaxSize.x + mapX;
 
-            if (mapPosition > 0 && mapPosition < mapMaxSize.x * mapMaxSize.y && mapArray[mapPosition] == 1) // Hit wall
+            if (mapPosition > 0 && mapPosition < mapMaxSize.x * mapMaxSize.y && mapArray[mapPosition] > 0) // Hit wall
             {
                 // Stocking in tmp to calculate shortest ray between H and V
                 tmpHorizontalRayX = rayX;
@@ -229,7 +229,7 @@ void Rays::render(sf::RenderTarget &target, sf::Vector2i mapMaxSize_, int tileSi
         target.draw(walls, 4, sf::Quads);
 
         // Increasing angle for next ray
-        rayAngle += DR;
+        rayAngle += DR / 6;
         if (rayAngle < 0)
             rayAngle += 2 * PI;
         if (rayAngle > 2 * PI)

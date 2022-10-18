@@ -7,7 +7,7 @@ class Map {
 private:
     sf::Vector2i mapMaxSize;
     int tileSize;
-    std::vector<int> mapArray;
+    vector<int> mapArray;
 
 public:
     // Constructors Destructors
@@ -19,7 +19,7 @@ public:
     //Get/Set Functions
     const int &getTileSizeMap() const;
     const sf::Vector2i &getMapMaxSize() const;
-    const std::vector<int> &getMapArray() const;
+    const vector<int> &getMapArray() const;
 };
 
 #endif // MAP_HPP_

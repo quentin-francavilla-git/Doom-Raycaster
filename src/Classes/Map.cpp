@@ -62,7 +62,7 @@ const sf::Vector2i &Map::getMapMaxSize() const
     return mapMaxSize;
 }
 
-const std::vector<int> &Map::getMapArray() const
+const vector<int> &Map::getMapArray() const
 {
     return mapArray;
 }

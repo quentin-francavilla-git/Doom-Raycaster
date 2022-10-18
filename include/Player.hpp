@@ -56,7 +56,6 @@ public:
     void update(float dt);
     void render(sf::RenderTarget &target);
 
-
     //Get/Set Functions
     const float &getPlayerAngle() const;
     const sf::Vector2f &getPlayerPosition() const;

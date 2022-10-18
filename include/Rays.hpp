@@ -19,7 +19,7 @@ private:
     //Map
     sf::Vector2i mapMaxSize;
     int tileSize;
-    std::vector<int> mapArray;
+    vector<int> mapArray;
 
     //Player
     float playerAngle;
@@ -30,10 +30,10 @@ private:
 
 public:
     // Constructors Destructors
-    Rays(sf::Vector2i mapMaxSize_, int tileSize_, std::vector<int> mapArray_, float playerAngle_, sf::Vector2f playerPos_);
+    Rays(sf::Vector2i mapMaxSize_, int tileSize_, vector<int> mapArray_, float playerAngle_, sf::Vector2f playerPos_);
     virtual ~Rays();
 
-    void render(sf::RenderTarget &target, sf::Vector2i mapMaxSize_, int tileSize_, std::vector<int> mapArray_, float playerAngle_, sf::Vector2f playerPos_);
+    void render(sf::RenderTarget &target, sf::Vector2i mapMaxSize_, int tileSize_, vector<int> mapArray_, float playerAngle_, sf::Vector2f playerPos_);
 };
 
 #endif // RAYS_HPP_

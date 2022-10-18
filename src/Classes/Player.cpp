@@ -21,8 +21,8 @@ void Player::initVariables(string _name, string _characterName)
     animState = IDLE;
     characterName = _characterName;
 
-    playerPos.x = 130;
-    playerPos.y = 130;
+    playerPos.x = 310;
+    playerPos.y = 313;
     playerDelta.x = cos(playerAngle) * 5;
     playerDelta.y = sin(playerAngle) * 5;
     playerAngle = 0;
@@ -49,6 +49,8 @@ void Player::update(float dt)
 {
     updateMovement(dt);
     updateAnimation();
+    // cout << "x: "<< playerPos.x << endl;
+    // cout << "y: "<<playerPos.y << endl;
 }
 
 void Player::updatePhysics()
@@ -57,7 +59,7 @@ void Player::updatePhysics()
 
 void Player::updateMovement(float dt)
 {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q)) // Left
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) // Left
     {
         playerAngle -= 6 * dt;
 
@@ -77,7 +79,7 @@ void Player::updateMovement(float dt)
         playerDelta.x = cos(playerAngle) * 5;
         playerDelta.y = sin(playerAngle) * 5;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Z)) // UP
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) // UP
     {
         playerRectangle.move(playerDelta.x * speed * dt, playerDelta.y * speed * dt);
     }

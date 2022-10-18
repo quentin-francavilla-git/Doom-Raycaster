@@ -13,8 +13,8 @@ Game::Game()
 Game::~Game()
 {
     delete window;
-    free(player);
-    delete player;
+    // free(player);
+    // delete player;
 }
 
 // Private Functions
@@ -26,7 +26,7 @@ void Game::initVariables()
 
 void Game::initMap()
 {
-    map = new Map(40);
+    map = unique_ptr<Map> (new Map(64));
 }
 
 void Game::initWindow()
@@ -40,19 +40,21 @@ void Game::initWindow()
 
 void Game::initPlayer()
 {
-    player = (Player **)malloc(MAX_PLAYERS * sizeof(Player));
-    player[0] = new Player("Pablo", "Jotaro");
+    //player = (Player **)malloc(MAX_PLAYERS * sizeof(Player));
+    //player[0] = new Player("Pablo", "Jotaro");
+    // unique_ptr<Player> player_ptr[0] = new Player("Pablo", "Jotaro");
+    player.push_back(unique_ptr<Player> (new Player("Pablo", "Jotaro")));
 }
 
 void Game::initRays()
 {
     sf::Vector2i mapMaxSize = map->getMapMaxSize();
     int tileSize = map->getTileSizeMap();
-    std::vector<int> mapArray = map->getMapArray();
+    vector<int> mapArray = map->getMapArray();
     float playerAngle = player[0]->getPlayerAngle();
     sf::Vector2f playerPos = player[0]->getPlayerPosition();
 
-    rays = new Rays(mapMaxSize, tileSize, mapArray, playerAngle, playerPos);
+    rays = unique_ptr<Rays>(new Rays(mapMaxSize, tileSize, mapArray, playerAngle, playerPos));
 }
 
 // Public Functions
@@ -65,7 +67,7 @@ void Game::renderRays()
 {
     sf::Vector2i mapMaxSize = map->getMapMaxSize();
     int tileSize = map->getTileSizeMap();
-    std::vector<int> mapArray = map->getMapArray();
+    vector<int> mapArray = map->getMapArray();
     float playerAngle = player[0]->getPlayerAngle();
     sf::Vector2f playerPos = player[0]->getPlayerPosition();
 
