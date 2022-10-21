@@ -11,8 +11,8 @@ private:
     sf::Color wallColor;
 
     //Screen
-    int screenWidth;
-    int screenHeight;
+    float screenWidth;
+    float screenHeight;
     int screenOffsetX;
     int screenOffsetY;
 

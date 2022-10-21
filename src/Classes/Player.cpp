@@ -27,7 +27,7 @@ void Player::initVariables(string _name, string _characterName)
     playerDelta.y = sin(playerAngle) * 5;
     playerAngle = 0;
 
-    inputs = shared_ptr<Input> (new Input("QWERTY"));
+    inputs = shared_ptr<Input> (new Input("AZERTY"));
 }
 
 void Player::initCharacter()
@@ -61,7 +61,7 @@ void Player::updatePhysics()
 
 void Player::updateMovement(float dt)
 {
-    if (sf::Keyboard::isKeyPressed(inputs->getleftKey())) // Left
+    if (sf::Keyboard::isKeyPressed(inputs->getInputMap().at("leftKey"))) // Left
     {
         playerAngle -= 6 * dt;
 
@@ -71,7 +71,7 @@ void Player::updateMovement(float dt)
         playerDelta.x = cos(playerAngle) * 5;
         playerDelta.y = sin(playerAngle) * 5;
     }
-    else if (sf::Keyboard::isKeyPressed(inputs->getrightKey())) // Right
+    else if (sf::Keyboard::isKeyPressed(inputs->getInputMap().at("rightKey"))) // Right
     {
         playerAngle += 6 * dt;
 
@@ -81,15 +81,15 @@ void Player::updateMovement(float dt)
         playerDelta.x = cos(playerAngle) * 5;
         playerDelta.y = sin(playerAngle) * 5;
     }
-    if (sf::Keyboard::isKeyPressed(inputs->getupKey())) // UP
+    if (sf::Keyboard::isKeyPressed(inputs->getInputMap().at("upKey"))) // UP
     {
         playerRectangle.move(playerDelta.x * speed * dt, playerDelta.y * speed * dt);
     }
-    else if (sf::Keyboard::isKeyPressed(inputs->getdownKey())) // Down
+    else if (sf::Keyboard::isKeyPressed(inputs->getInputMap().at("downKey"))) // Down
     {
         playerRectangle.move(-playerDelta.x * speed * dt, -playerDelta.y * speed * dt);
     }
-    if (sf::Keyboard::isKeyPressed(inputs->getjumpKey())) // Up
+    if (sf::Keyboard::isKeyPressed(inputs->getInputMap().at("jumpKey"))) // Up
     {
     }
     playerPos = playerRectangle.getPosition();

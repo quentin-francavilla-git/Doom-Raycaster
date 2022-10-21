@@ -14,9 +14,10 @@ public:
     Map(int _size);
     virtual ~Map();
 
+    // Public functions
     void render(sf::RenderTarget &target);
 
-    //Get/Set Functions
+    //Methods
     const int &getTileSizeMap() const;
     const sf::Vector2i &getMapMaxSize() const;
     const vector<int> &getMapArray() const;

@@ -20,7 +20,7 @@ Rays::Rays(sf::Vector2i mapMaxSize_, int tileSize_, vector<int> mapArray_, float
 
     //Screen
     screenHeight = 700;
-    screenWidth = 2;
+    screenWidth = 2.5;
     screenOffsetX = 800;
     screenOffsetY = 250;
 }
