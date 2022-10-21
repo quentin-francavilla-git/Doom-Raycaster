@@ -3,15 +3,15 @@
 
 int main()
 {
-  Game game;
+    Game game;
 
-  while (game.running())
-  {
-    // Update
-    game.update();
-    // Render
-    game.render();
-  }
+    while (game.running())
+    {
+        // Update
+        game.update();
+        // Render
+        game.render();
+    }
 
-  return 0;
+    return 0;
 }

@@ -26,6 +26,7 @@ private:
     // Mouse
     sf::Vector2i mousePosWindows;
 
+    //Import classes
     vector<unique_ptr<Player>> player;
     unique_ptr<Map> map;
     unique_ptr<Rays> rays;

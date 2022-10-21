@@ -2,6 +2,7 @@
 #define PLAYER_HPP_
 
 #include "lib.hpp"
+#include "Input.hpp"
 
 enum PLAYER_ANIMATION_STATES
 {
@@ -37,6 +38,9 @@ private:
     sf::Vector2f velocity;
     float acceleration;
     float deceleration;
+
+    //Import classes
+    shared_ptr<Input> inputs;
 
     // Private Functions
     void initVariables(string _name, string _characterName);
