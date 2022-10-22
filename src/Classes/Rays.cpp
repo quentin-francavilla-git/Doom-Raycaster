@@ -189,6 +189,7 @@ void Rays::render(sf::RenderTarget &target, sf::Vector2i mapMaxSize_, int tileSi
             rayY = tmpVerticalRayY;
             distFinal = distVertical;
             wallColor.r = 176;
+            rayColor = wallColor;
         }
         if (distHorizontal < distVertical) //Hiting Horizontal Wall
         {
@@ -196,6 +197,7 @@ void Rays::render(sf::RenderTarget &target, sf::Vector2i mapMaxSize_, int tileSi
             rayY = tmpHorizontalRayY;
             distFinal = distHorizontal;
             wallColor.r = 255;
+            rayColor = wallColor;
         }
 
         // Drawing rays
