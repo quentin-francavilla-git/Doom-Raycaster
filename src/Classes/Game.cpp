@@ -26,7 +26,7 @@ void Game::initVariables()
 
 void Game::initMap()
 {
-    map = unique_ptr<Map> (new Map(64));
+    map = unique_ptr<Map>(new Map(64));
 }
 
 void Game::initWindow()
@@ -43,18 +43,13 @@ void Game::initPlayer()
     //player = (Player **)malloc(MAX_PLAYERS * sizeof(Player));
     //player[0] = new Player("Pablo", "Jotaro");
     // unique_ptr<Player> player_ptr[0] = new Player("Pablo", "Jotaro");
-    player.push_back(unique_ptr<Player> (new Player("Pablo", "Jotaro")));
+    player.push_back(unique_ptr<Player>(new Player("Pablo", "Jotaro")));
 }
 
 void Game::initRays()
 {
-    sf::Vector2i mapMaxSize = map->getMapMaxSize();
-    int tileSize = map->getTileSizeMap();
-    vector<int> mapArray = map->getMapArray();
-    float playerAngle = player[0]->getPlayerAngle();
-    sf::Vector2f playerPos = player[0]->getPlayerPosition();
-
-    rays = unique_ptr<Rays>(new Rays(mapMaxSize, tileSize, mapArray, playerAngle, playerPos));
+    rays = unique_ptr<Rays>(new Rays(map->getMapMaxSize(), map->getTileSizeMap(),
+    map->getMapArray(), player[0]->getPlayerAngle(), player[0]->getPlayerPosition()));
 }
 
 // Public Functions
@@ -65,13 +60,8 @@ void Game::renderMap2D()
 
 void Game::renderRays()
 {
-    sf::Vector2i mapMaxSize = map->getMapMaxSize();
-    int tileSize = map->getTileSizeMap();
-    vector<int> mapArray = map->getMapArray();
-    float playerAngle = player[0]->getPlayerAngle();
-    sf::Vector2f playerPos = player[0]->getPlayerPosition();
-
-    rays->render(*window, mapMaxSize, tileSize, mapArray, playerAngle, playerPos);
+    rays->render(*window, map->getMapMaxSize(), map->getTileSizeMap(),
+    map->getMapArray(), player[0]->getPlayerAngle(), player[0]->getPlayerPosition());
 }
 
 const bool Game::running() const
@@ -134,7 +124,7 @@ void Game::updateMousePositions()
 // Player Functions
 void Game::updatePlayer()
 {
-    player[0]->update(dt);
+    player[0]->update(dt, map->getTileSizeMap(), map->getMapArray(), map->getMapMaxSize());
 }
 
 void Game::renderPlayer()

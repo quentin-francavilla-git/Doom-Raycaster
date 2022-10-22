@@ -16,13 +16,31 @@ Player::~Player()
 // Private Functions
 void Player::initVariables(string _name, string _characterName)
 {
+    //Data
     name = _name;
     speed = 20;
     animState = IDLE;
     characterName = _characterName;
 
+
+    //Positions
     playerPos.x = 310;
     playerPos.y = 313;
+    playerPosInMap.x = playerPos.x / tileSize;
+    playerPosInMap.y = playerPos.y / tileSize;
+    playerMoveOffset.x = 0;
+    playerMoveOffset.y = 0;
+
+    //Collisions
+    CollisionOffset.x = 0;
+    CollisionOffset.y = 0;
+    playerPosInMap_add_Offset.x = 0;
+    playerPosInMap_add_Offset.y = 0;
+    playerPosInMap_sub_Offset.x = 0;
+    playerPosInMap_sub_Offset.y = 0;
+
+
+    //Angle
     playerDelta.x = cos(playerAngle) * 5;
     playerDelta.y = sin(playerAngle) * 5;
     playerAngle = 0;
@@ -47,12 +65,35 @@ void Player::initAnimation()
 }
 
 // Public Functions
-void Player::update(float dt)
+void Player::update(float dt, int tileSize_, vector<int> mapArray_, sf::Vector2i mapMaxSize_)
 {
+    mapMaxSize = mapMaxSize_;
+    tileSize = tileSize_;
+    mapArray = mapArray_;
     updateMovement(dt);
     updateAnimation();
-    // cout << "x: "<< playerPos.x << endl;
-    // cout << "y: "<<playerPos.y << endl;
+    updateCollisions(dt);
+}
+
+void Player::updateCollisions(float dt)
+{
+    playerPosInMap.x = playerPos.x / tileSize;
+    playerPosInMap.y = playerPos.y / tileSize;
+
+    if (playerDelta.x < 0)
+        CollisionOffset.x = - 20;
+    else
+        CollisionOffset.x = 20;
+
+    if (playerDelta.y < 0)
+        CollisionOffset.y = - 20;
+    else
+        CollisionOffset.y = 20;
+
+    playerPosInMap_add_Offset.x = (playerPos.x + CollisionOffset.x) / 64.0;
+    playerPosInMap_add_Offset.y = (playerPos.y + CollisionOffset.y) / 64.0;
+    playerPosInMap_sub_Offset.x = (playerPos.x - CollisionOffset.x) / 64.0;
+    playerPosInMap_sub_Offset.y = (playerPos.y - CollisionOffset.y) / 64.0;
 }
 
 void Player::updatePhysics()
@@ -83,11 +124,34 @@ void Player::updateMovement(float dt)
     }
     if (sf::Keyboard::isKeyPressed(inputs->getInputMap().at("upKey"))) // UP
     {
-        playerRectangle.move(playerDelta.x * speed * dt, playerDelta.y * speed * dt);
+        if (mapArray[playerPosInMap.y * mapMaxSize.x + playerPosInMap_add_Offset.x] == 0) {
+            playerMoveOffset.x = playerDelta.x * speed * dt;
+        }
+        else
+            playerMoveOffset.x = 0;
+
+        if (mapArray[playerPosInMap_add_Offset.y * mapMaxSize.x + playerPosInMap.x] == 0) {
+            playerMoveOffset.y = playerDelta.y * speed * dt;
+        }
+        else
+            playerMoveOffset.y = 0;
+
+        playerRectangle.move(playerMoveOffset.x, playerMoveOffset.y);
     }
     else if (sf::Keyboard::isKeyPressed(inputs->getInputMap().at("downKey"))) // Down
     {
-        playerRectangle.move(-playerDelta.x * speed * dt, -playerDelta.y * speed * dt);
+        if (mapArray[playerPosInMap.y * mapMaxSize.x + playerPosInMap_sub_Offset.x] == 0) {
+            playerMoveOffset.x = -playerDelta.x * speed * dt;
+        }
+        else
+            playerMoveOffset.x = 0;
+
+        if (mapArray[playerPosInMap_sub_Offset.y * mapMaxSize.x + playerPosInMap.x] == 0) {
+            playerMoveOffset.y = -playerDelta.y * speed * dt;
+        }
+        else
+            playerMoveOffset.y = 0;
+        playerRectangle.move(playerMoveOffset.x, playerMoveOffset.y);
     }
     if (sf::Keyboard::isKeyPressed(inputs->getInputMap().at("jumpKey"))) // Up
     {

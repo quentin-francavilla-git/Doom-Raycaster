@@ -28,6 +28,14 @@ private:
     //Position
     sf::Vector2f playerDelta;
     sf::Vector2f playerPos;
+    sf::Vector2i playerPosInMap;
+    sf::Vector2f playerMoveOffset;
+
+    //Collisions
+    sf::Vector2i CollisionOffset;
+    sf::Vector2i playerPosInMap_add_Offset;
+    sf::Vector2i playerPosInMap_sub_Offset;
+
     float playerAngle;
 
     // Animation
@@ -38,6 +46,11 @@ private:
     sf::Vector2f velocity;
     float acceleration;
     float deceleration;
+
+    //Map
+    sf::Vector2i mapMaxSize;
+    int tileSize;
+    vector<int> mapArray;
 
     //Import classes
     shared_ptr<Input> inputs;
@@ -54,10 +67,11 @@ public:
     virtual ~Player();
 
     // Public Functions
+    void update(float dt, int tileSize_, vector<int> mapArray_, sf::Vector2i mapMaxSize_);
     void updatePhysics();
     void updateMovement(float dt);
     void updateAnimation();
-    void update(float dt);
+    void updateCollisions(float dt);
     void render(sf::RenderTarget &target);
 
     //Methods
