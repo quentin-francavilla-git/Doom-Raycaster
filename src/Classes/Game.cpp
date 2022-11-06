@@ -49,7 +49,7 @@ void Game::initPlayer()
 void Game::initRays()
 {
     rays = unique_ptr<Rays>(new Rays(map->getMapMaxSize(), map->getTileSizeMap(),
-    map->getMapArray(), player[0]->getPlayerAngle(), player[0]->getPlayerPosition()));
+        map->getMapArray(), player[0]->getPlayerAngle(), player[0]->getPlayerPosition()));
 }
 
 // Public Functions
@@ -61,7 +61,7 @@ void Game::renderMap2D()
 void Game::renderRays()
 {
     rays->render(*window, map->getMapMaxSize(), map->getTileSizeMap(),
-    map->getMapArray(), player[0]->getPlayerAngle(), player[0]->getPlayerPosition());
+        map->getMapArray(), player[0]->getPlayerAngle(), player[0]->getPlayerPosition());
 }
 
 const bool Game::running() const

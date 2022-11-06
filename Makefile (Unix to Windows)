@@ -1,12 +1,12 @@
-#Windows
+#UNIX TO WINDOWS
 SRC = $(wildcard ./src/*.cpp ./src/Classes/*.cpp)
 OBJECTS += $(filter %.o,$(SRC:.cpp=.o))
 CFLAGS  = -w -g
 LIBPATH = -L/C:/Users/Quentin/Documents/Projets/Libs/SFML-2.5.1/lib/
 LIBS = -lsfml-graphics -lsfml-window -lsfml-system
-INCLUDES = -I./include/ -I./C:/Users/Quentin/Documents/Projets/Libs/SFML-2.5.1/include/
+INCLUDES = -I./include/ -I/usr/include/
 NAME	=	doom.exe
-CC = g++
+CC = x86_64-w64-mingw32-g++
 
 all:	$(NAME)
 
